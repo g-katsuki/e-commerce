@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link href="/css/sample.css" th:href="@{'/css/sample.css'}" rel="stylesheet"></link>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <title>login</title>
+</head>
+
+
+<div id="userInfo" style="text-align: left; border-bottom: 1px solid lightgray; padding-top: 10px">
+    <span>
+        <a href="/application/item/list">
+            <img src="./../images/logo.png" width="70" alt="logo">
+        </a>
+    </span>
+    <h1>サインイン</h1>
+</div>
+
+<body>
+<div style="margin-left: 20%; mergin-top: 10%; padding: 30px">
+    <div class="gray_body">
+
+        <h2 th:text="${message}" style="margin-left: 5%; color:white;"></h2>
+
+        <form th:action="@{/user/register}" method="post">
+            <table cellpadding="5px">
+                <tr>
+                    <td><font color="white">ユーザーID (Email): </font></td>
+                    <td><input type="email" name="email" th:value="${userForm.email}"></td>
+                </tr>
+                <tr>
+                    <td><font color="white">パスワード: </font></td>
+                    <td><input type="password" name="password" th:value="${userForm.password}"> </td>
+                </tr>
+                <tr>
+                    <td><font color="white">パスワードの確認: </font></td>
+                    <td><input type="password" name="confirmPassword" th:value="${userForm.confirmPassword}"> </td>
+                </tr>
+                <tr>
+                    <td><font color="white">名: </font></td>
+                    <td><input type="text" name="firstName" th:value="${userForm.firstName}"> </td>
+                </tr>
+                <tr>
+                    <td><font color="white">姓: </font></td>
+                    <td><input type="text" name="lastName" th:value="${userForm.lastName}"> </td>
+                </tr>
+                <tr>
+                    <td><font color="white">郵便番号: </font></td>
+                    <td><input type="text" name="zipCode" th:value="${userForm.zipCode}"> </td>
+                </tr>
+                <tr>
+                    <td><font color="white">住所: </font></td>
+                    <td><input type="text" name="address" th:value="${userForm.address}"> </td>
+                </tr>
+                <tr>
+                    <td><font color="white">電話番号: </font></td>
+                    <td><input type="text" name="phone" th:value="${userForm.phone}"> </td>
+                </tr>
+                <td>
+                    <input type="hidden" name="point" value="0"/>
+                </td>
+                <tr>
+                    <td>&nbsp;&nbsp; </td>
+                    <td><input type="submit" value="サインイン"> </td>
+                </tr>
+                <tr>
+                    <td>&nbsp; </td>
+                    <td>&nbsp; </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+</div>
+
+<br/><br/>
+
+<a th:href="@{/item/list}">買い物を続ける</a>
+
+</body>
+</html>

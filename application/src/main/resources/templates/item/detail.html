@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link href="/css/sample.css" th:href="@{'/css/sample.css'}" rel="stylesheet"></link>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <title>Product Detail</title>
+</head>
+
+
+<div id="userInfo" style="text-align: left; border-bottom: 1px solid lightgray; padding-top: 10px">
+    <span>
+        <a href="/application/item/list">
+            <img src="./../../images/logo.png" width="70" alt="logo">
+        </a>
+    </span>
+    <h1>商品の詳細</h1>
+</div>
+
+
+<body>
+<div class="in_body">
+<table cellspacing="0" cellpadding="0" border="0">
+    <tbody>
+    <tr>
+        <td valign="top"><a
+                href="https://m.media-amazon.com/images/I/51S57zCL9TL._AC_SX679_.jpg"
+                expid="10002202" data-ratparam="all" data-ratid="itempopup_1"
+                data-ratevent="click" class="rakutenLimitedId_ImageMain1-3"><img
+                th:src="${item.photoAddress}" th:width="300"
+                expid="10002202" border="0" th:alt="${item.name}"/><br>
+        </a></td>
+        <td><img width="20" src="/com/img/home/t.gif" height="1" alt=""></td>
+        <td valign="top">
+            <h2 th:text="${item.name}"></h2>
+
+            <table cellspacing="2" cellpadding="0" border="0">
+                <tbody>
+                <tr>
+                    <td nowrap=""><span class="item_number_title">商品番号</span>&nbsp;
+                    </td>
+                    <td nowrap=""><span class="item_number">69-SB-0059</span></td>
+                </tr>
+                </tbody>
+            </table>
+            <div id="offers" itemprop="offers" itemscope=""
+                 itemtype="http://schema.org/Offer">
+                <table id="rakutenLimitedId_cart" cellspacing="2" cellpadding="0"
+                       border="0">
+                    <tbody>
+                    <tr>
+                        <td valign="top" nowrap="" align="right"><span
+                                class="double_price_title">当店通常価格</span></td>
+                        <td><span class="double_price"><span
+                                th:text="${#numbers.formatInteger(item.price, 2, 'COMMA')}">3,190</span> 円 (税込)</span><span
+                                class="double_price_title"></span></td>
+                    </tr>
+                    <tr>
+                        <td valign="top" nowrap="" align="right"><span
+                                class="price1">価格</span></td>
+                        <td>
+                            <div id="priceCalculationConfig" data-price="3190"
+                                 data-free-shipping="1"></div>
+                            <span itemprop="price"
+                                  content="3190" class="price2"><span
+                                    th:text="${#numbers.formatInteger(item.price, 2, 'COMMA')}">3,190</span> 円</span><span
+                                class="tax_postage">(税込)</span>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div id="rakutenLimitedId_aroundCart" class="standard">
+                <form role="form" action="/cart/add" th:action="@{/cart/add}" method="post">
+                    <table id="normal_basket_10002202" cellspacing="2"
+                           cellpadding="0" border="0">
+
+                        <tbody th:if="${user}">
+                            <tr>
+                            <td class="floatingCartPurchaseButtonsContainer no-sku-selected">
+                                <span class="quantity">個数&nbsp; </span>
+                                <input value="1" type="text" size="4" name="quantity" id="quantity" class="rItemUnits">
+                                <span class="floatingCartSplitButtons">
+                                    <button data-ratparam="all" data-ratid="fixed_add" data-ratevent="pv,appear"
+                                            class="cart-button add-cart new-cart-button sku-submit-add-cart">
+                                        <span class="normal">
+                                            <img src="https://r.r10s.jp/com/img/rms/storefront/pc/page/plussign_23x23.png"><span>商品をかごに追加</span>
+                                        </span>
+                                    </button>
+                                </span>
+                                <div id="offerNotificationCart"></div>
+                                <input value="ES01_003_001" type="hidden" name="__event">
+                                <input value="228340" type="hidden" name="shop_bid">
+                                <input th:value="${item.itemId}" type="hidden" name="itemId">
+                                <input th:value="${item.name}" type="hidden" name="name">
+                                <input th:value="${item.description}" type="hidden" name="description">
+                                <input th:value="${item.price}" type="hidden" name="price">
+                                <input th:value="${item.photoAddress}" type="hidden" name="photoAddress">
+                                <input th:value="${item.itemId}" type="hidden" name="item_id">
+                                <input th:value="${item.point}" type="hidden" name="point">
+
+                            </td>
+                            </tr>
+                        </tbody>
+
+                        <b>
+                            <a th:unless="${user}" href="/application/user/login">カートに商品を追加するにはログインしてください</a>
+                        </b>
+
+                    </table>
+                </form>
+            </div>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</div>
+</body>
+</html>

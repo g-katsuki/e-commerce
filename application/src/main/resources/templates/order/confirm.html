@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link href="/css/sample.css" th:href="@{'/css/sample.css'}" rel="stylesheet"></link>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <title>Confirm</title>
+</head>
+
+<div id="userInfo" style="text-align: left; border-bottom: 1px solid lightgray; padding-top: 10px">
+    <span>
+        <a href="/application/item/list">
+            <img src="./../images/logo.png" width="70" alt="logo">
+        </a>
+    </span>
+    <span align="right">
+        <a th:unless="${user}" href="/application/user/login" align="right">
+            <img src="./../images/login-logo2.png" width="170" alt="logo" align="right">
+        </a>
+    </span>
+    <span align="right">
+        <a th:if="${user}" href="/application/user/signout" align="right">
+            <img src="./../images/signout.png" width="70" alt="logo" align="right">
+        </a>
+    </span>
+    <span align="right" margin="10px">
+        <a th:if="${user}" href="/application/user/profile" align="right">
+            <img src="./../images/profile.png" width="70" alt="logo" align="right">
+        </a>
+    </span>
+
+    <h1>注文の確認</h1>
+</div>
+
+<body>
+<table class="table_style" align="center" border="1" width="600">
+    <tr>
+        <th width="150">商品</th>
+        <th width="150">商品名</th>
+        <th width="150">値段</th>
+        <th width="150">個数</th>
+    </tr>
+    <tr th:each="item : ${items}">
+        <td align="center">
+            <img th:src="${item.photoAddress}" border="0" th:alt="${item.name}" height="100" width="100">
+        </td>
+        <td align="center">
+            <b th:text="${item.name}"></b>
+        </td>
+        <td align="center">
+            <b><span th:text="${#numbers.formatInteger(item.price, 2, 'COMMA')}"/> 円</b>
+        </td>
+        </td>
+        <td align="center">
+            <b><span th:text="${item.quantity}"/> 個 </b>
+        </td>
+    </tr>
+    <tr align="right">
+        <td colspan="4">
+            <b> 合計: <span th:text="${#numbers.formatInteger(totalPrice, 2, 'COMMA')}" style="color:#dc143c;"/> 円</b>
+            <br><b> 獲得ポイント:
+            <span th:unless="${doubledPoint}" th:text="${totalPoint}" style="color:#dc143c;"/>
+            <span th:if    ="${doubledPoint}" th:text="${doubledPoint}" style="color:#dc143c;"/>
+            pt</b>
+            <br><b> 現在ポイント: <span th:text="${user.point}" style="color:#dc143c;"/> pt</b>
+        </td>
+    </tr>
+</table>
+
+
+<div class="item-list">
+<form th:if="${totalPrice}" role="form" action="/order/complete"
+      th:action="@{/order/complete}" 　method="post">
+    <div align="center">
+        使用ポイント:
+        <input type="number" class="num_form" size="3" name="usePoint" min="0" max="${user.point}" th:value="${usePoint}"/></td>
+        <button class="item">注文の確定</button>
+    </div><br>
+</form>
+</div>
+
+</body>
+
+<!--<div class="item-list">-->
+<!--<form th:if="${totalPrice}" role="form" action="/order/complete"-->
+<!--      th:action="@{/order/complete}" 　method="post">-->
+<!--    <button class="item">注文の確定</button>-->
+<!--</form>-->
+<!--</div>-->
+
+
+<table cellpadding="5px" class="pro_bg" align="center" margin="auto">
+    <tr align="center">
+        <th colspan="2">
+            <u><font size="5">お届け先情報</font></u>
+        </th>
+    </tr>
+    <tr>
+        <td style="font-weight: bold" margin-left=10px>メールアドレス:</td>
+        <td th:text="${user.email}">Email</td>
+    </tr>
+    <tr>
+        <td style="font-weight: bold">パスワード:</td>
+        <td>**********</td>
+    </tr>
+    <tr>
+        <td style="font-weight: bold">名:</td>
+        <td th:text="${user.firstName}">First name</td>
+    </tr>
+    <tr>
+        <td style="font-weight: bold">姓:</td>
+        <td th:text="${user.lastName}">Last name</td>
+    </tr>
+    <tr>
+        <td style="font-weight: bold">郵便番号:</td>
+        <td th:text="${user.zipCode}">Zip code</td>
+    </tr>
+    <tr>
+        <td style="font-weight: bold">住所:</td>
+        <td th:text="${user.address}">Address</td>
+    </tr>
+    <tr>
+        <td style="font-weight: bold">電話番号:</td>
+        <td th:text="${user.phone}">Phone</td>
+    </tr>
+<!--    <tr>-->
+<!--        <td style="font-weight: bold">登録した日:</td>-->
+<!--        <td th:text="${user.createdAt}">Date</td>-->
+<!--    </tr>-->
+</table>
+
+
+
+
+
+<!--<table border="0">-->
+<!--    <tbody>-->
+<!--    <tr>-->
+<!--        <td valign="top">-->
+<!--            <table border="1">-->
+<!--                <tr th:each="item : ${items}">-->
+<!--                    <td valign="top">-->
+<!--                        <img th:src="${item.photoAddress}" border="0" th:alt="${item.name}" height="100" width="100">-->
+<!--                    </td>-->
+<!--                    <td valign="top">-->
+<!--                        <h3 th:text="${item.name}"></h3><br/>-->
+<!--                        <b th:text="${item.price}"></b>円 (Tax included)-->
+<!--                    </td>-->
+<!--                    <td>Quantity: <span th:text="${item.quantity}"/></td>-->
+<!--                </tr>-->
+<!--            </table>-->
+<!--        </td>-->
+<!--        <td valign="top" th:cellpadding="5">-->
+<!--            <div style="margin-bottom: 2px">-->
+<!--                <span th:unless="${loggedInUser}" style="font-weight: bold; color: crimson">Please login first to place your order!</span><br/>-->
+<!--                <form role="form" th:action="@{/order/complete}" method="post">-->
+<!--                    <button th:if="${loggedInUser}" style="color: #a90729; height: 50px; width: 200px; padding: 2px"><b>CONFIRM ORDER</b></button>-->
+<!--                    <button th:unless="${loggedInUser}" disabled style="color: #a90729; height: 50px; width: 200px; padding: 2px"><b>CONFIRM ORDER</b></button>-->
+<!--                </form>-->
+<!--            </div>-->
+<!--            <div style="border: 2px solid darkred;text-align: center">-->
+<!--                <h2 style="margin: 0">Total <span th:text="${#numbers.formatInteger(totalPrice, 1, 'COMMA')}"/>円</h2>-->
+<!--                <br/>-->
+<!--                (Tax Included)-->
+<!--                <hr/>-->
+<!--                Order total: <span th:text="${#numbers.formatInteger(totalPrice, 1, 'COMMA')}"/>円<br/>-->
+<!--                Point use: None-->
+<!--                <hr/>-->
+<!--                Schedule to earn 20 points-->
+<!--            </div>-->
+<!--        </td>-->
+<!--    </tr>-->
+<!--    </tbody>-->
+<!--</table>-->
+</html>

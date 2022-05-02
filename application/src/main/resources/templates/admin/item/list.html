@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link href="/css/sample.css"
+          th:href="@{/css/sample.css}" rel="stylesheet"></link>
+    <title>Admin Item List Page</title>
+</head>
+
+<div id="userInfo" style="text-align: left;">
+    <span>
+        <a href="/application/item/list">
+            <img src="./../../images/logo.png" width="70" alt="logo">
+        </a>
+    </span>
+    <div style="float: right">
+        <input type="button" class="btn_style" name="ADD NEW PRODUCT" value="商品を追加する"
+               th:attr="onClick='location.href=\''+@{/admin/item/new}+'\''">
+    </div>
+    <div style="float: right">
+        <input type="button" class="btn_style" name="ORDERS" value="注文の管理"
+               th:attr="onClick='location.href=\''+@{/admin/order/list}+'\''">
+    </div>
+
+    <h1>商品一覧 (admin page)</h1>
+</div>
+
+<body>
+<div class="in_body">
+<hr/>
+<div class="dui-container main">
+
+    <div class="inline" th:each="item : ${items}">
+        <div class="image">
+            <a target="_top" th:href="@{'/admin/item/detail/' + ${item.itemId}}">
+                <img class="_verticallyaligned" th:src="${item.photoAddress}" th:width="200" th:alt="${item.name}">
+            </a>
+        </div>
+        <div class="content title">
+            <h2>
+                <a target="_top" th:href="@{'/admin/item/detail/' + ${item.itemId}}">
+                    <span th:text="${item.name}"/>
+                </a>
+            </h2>
+        </div>
+        <div class="content description price">
+                    <span class="important"><span
+                            th:text="${#numbers.formatInteger(item.price, 2, 'COMMA')}">3,190</span><small>円</small></span>
+            <span class="with-help" data-tooltip="help-shipping"
+                  data-duitrack="help-shipping"> <span
+                    class="dui-tag -shipping"> 送料無料 </span> <i
+                    class="dui-icon -info -circle _grey"></i></span>
+        </div>
+        <div class="content points" data-shop-id="228340"
+             data-item-id="10002202" data-trigger="points"
+             data-duitrack="point-display-popup">
+            <span>31ポイント(1倍)</span> <i class="dui-icon -info -circle _grey"></i>
+        </div>
+        <div class="content review">
+            <a class="dui-rating-filter _link" target="_top"
+               data-track-action="review"
+               href="https://review.rakuten.co.jp/item/1/228340_10002202/1.1/">
+                <span class="dui-rating -full"> <i
+                        class="dui-icon -rating "></i> <i class="dui-icon -halfrating "></i></span>
+                <span class="dui-rating -full"> <i
+                        class="dui-icon -rating "></i> <i class="dui-icon -halfrating "></i></span>
+                <span class="dui-rating -full"> <i
+                        class="dui-icon -rating "></i> <i class="dui-icon -halfrating "></i></span>
+                <span class="dui-rating -full"> <i
+                        class="dui-icon -rating "></i> <i class="dui-icon -halfrating "></i></span>
+                <span class="dui-rating -half"> <i
+                        class="dui-icon -rating "></i> <i class="dui-icon -halfrating "></i></span>
+                <span class="score">4.39</span> <span class="legend">(31件)</span>
+            </a>
+        </div>
+        <div class="content">
+            <div class="cashless _link" title="キャッシュレス5％還元対象"
+                 data-tooltip="help-cashless" data-duitrack="help-cashless">
+                <img src="https://r.r10s.jp/com/assets/components/searchResultItem/images/cashless.svg" alt="-">
+            </div>
+        </div>
+        <br/>
+    </div>
+</div>
+</div>
+</body>
+</html>

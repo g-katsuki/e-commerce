@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link href="/css/sample.css" th:href="@{'/css/sample.css'}" rel="stylesheet"></link>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <title>Shopping Cart</title>
+</head>
+
+
+<div id="userInfo" style="text-align: left; border-bottom: 1px solid lightgray; padding-top: 10px">
+        <span>
+            <a href="/application/item/list">
+                <img src="./../images/logo.png" width="70" alt="logo">
+            </a>
+        </span>
+
+    <h1>カート内容</h1>
+</div>
+
+
+<body>
+<div class="in_body">
+    <div>
+    <div id="userInfo" style="text-align: left; border-bottom: 1px solid lightgray; padding-top: 10px">
+        <span th:text="${message}" style="color:#dc143c;"></span>
+        <span th:text="${message}" style="color:#dc143c;"></span>
+        <table>
+            <tbody>
+            <tr th:each="item : ${items}"> <!-- コントローラでitemsって名前の変数にcartの情報を入れてある -->
+                <td valign="top">
+                    <a th:href="@{'/item/detail/' + ${item.itemId}}">
+                        <img th:src="${item.photoAddress}" th:alt="${item.name}" height="150" width="150"><br>
+                    </a>
+                </td>
+                <td valign="top">
+                    <table cellspacing="2" cellpadding="0" border="0">
+                        <tbody>
+                        <tr>
+                            <td><h2 class="catch_copy" th:text="${item.name}"></h2></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <div id="offers">
+                        <table id="rakutenLimitedId_cart" cellspacing="2" cellpadding="0"
+                               border="0">
+                            <tbody>
+                            <tr>
+                                <td valign="top" nowrap="" align="right"><span
+                                        class="double_price_title">値段:  </span></td>  <!-- spanは改行が入らないグループ分け -->
+                                <td><span class="double_price"><span
+                                        th:text="${#numbers.formatInteger(item.price, 1, 'COMMA')}"
+                                        style="color:#dc143c;">3,190</span> 円 (税込)</span><span
+                                        class="double_price_title"></span>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div>
+                        <table id="normal_basket_10002202" cellspacing="2" cellpadding="0" border="0">
+                            <tbody>
+                            <tr>
+                                <td>個数:</td>
+                                <td>
+                                    <button class="iro"><a th:href="@{'/cart/update?unit=1&itemId=' + ${item.itemId}}"
+                                               style="text-decoration:none; color:white;">+</a></button>  <!-- (クエリ)?以降で引数を与えて&は分割 -->
+                                    <button type="button" class="btn btn-sm" th:text="${item.quantity}">1</button>
+                                    <button class="iro"><a th:href="@{'/cart/update?unit=-1&itemId=' + ${item.itemId}}"
+                                               style="text-decoration:none; color:white;">-</a></button>
+                                    <!-- ここに <input type = "reset">を作りたい -->
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div>
+                    <form action="/cart/clear" method="post">
+                        <button>この商品をカートから外す</button>
+                    </form>
+                </div>
+            </tr>
+            </tbody>
+        </table>
+        <h2>
+            <div style="text-align: right">
+                <td ><span
+                        class="total_double_price_title">合計:  </span></td>
+                <span class="important"><span th:text="${#numbers.formatInteger(totalPrice, 1, 'COMMA')}"
+                                              style="color:#dc143c;">3,190</span><small>円 (税込)</small>
+                </span>
+            </div>
+            <div style="text-align: right">
+                <td ><span
+                        class="total_double_price_title">獲得ポイント  </span></td>
+                <span th:unless="${doubledPoint}" th:text="${totalPoint}" style="color:#dc143c;"/>
+                <span th:if    ="${doubledPoint}" th:text="${doubledPoint}" style="color:#dc143c;"/>
+                 pt</small>
+                </span>
+            </div>
+        </h2>
+
+        <div class="item-list">
+            <form role="form" action="/item/list"
+                  th:action="@{/item/list}" >
+                <button class="item">買い物を続ける</button>
+            </form>
+            <form th:if="${totalPrice}" role="form" action="/order/confirm"
+                  th:action="@{/order/confirm}" 　method="get">
+                <button class="item">注文の確認へ進む</button>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

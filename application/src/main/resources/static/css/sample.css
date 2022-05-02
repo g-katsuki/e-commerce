@@ -1,0 +1,144 @@
+html{
+    background: #191970;
+}
+p {
+    color: blue;
+    line-height: 1.5;
+}
+h1 {
+    padding: 5px;
+    padding-left: 10%;
+    color: white;
+    background: #bf0000;
+    border-radius: 10px; /* 角の丸み */
+}
+h2 {
+    margin: 0;  /* 内側の余白 */
+}
+
+a { text-decoration: none; }
+
+body {
+    margin-top: 50px;
+    margin-bottom: 50px;
+    margin-left: 80px;
+    margin-right: 80px;
+    padding: 20px;
+    border-radius: 20px; /* 角の丸み */
+    background: white;
+}
+
+.pro_bg {
+    margin: auto;
+    margin-top: 10px;
+    padding-left: 20px;
+    background: #d3d3d3;
+    border-radius: 20px; /* 角の丸み */
+    width: 500px;
+}
+
+.gray_body {
+    background: #bf0000;
+    width: 70%;
+    margin: 0; /* 前後の隙間 */
+    padding-left:   2em; /* 塗りの余白 */
+    padding-right:  0em; /* 塗りの余白 */
+    padding-top:    2em; /* 塗りの余白 */
+    padding-bottom: 2em; /* 塗りの余白 */
+    border-radius: 20px; /* 角の丸み */
+}
+
+
+.table_style{
+    border-collapse: collapse;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.btn_style{
+    /* ブラウザ特有のスタイルを無効に */
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    appearance: none;
+
+    /* 整える */
+    margin: 5px;
+    margin-top: 20px;
+    padding: 0.6em 1em; /* 塗りの余白 */
+    font-size: 1em; /* フォントサイズ */
+    background-color: #bf0000; /* 背景色 */
+    color: white; /* テキストカラー */
+    cursor: pointer; /* カーソルを指マークに */
+    border-radius: 20px; /* 角の丸み */
+    border: 0; /* 枠線を消す */
+    transition: 0.3s; /* ホバーの変化を滑らかに */
+}
+
+.btn_style:hover {
+  background-color: #064fda; /* 背景色 */
+}
+
+.iro {
+  /* ブラウザ特有のスタイルを無効に */
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+
+  /* 整える */
+  margin: 1em 0; /* 前後の隙間 */
+  padding: 0.6em 1em; /* 塗りの余白 */
+  font-size: 0.5em; /* フォントサイズ */
+  background-color: #bf0000; /* 背景色 */
+  color: white; /* テキストカラー */
+  cursor: pointer; /* カーソルを指マークに */
+  border-radius: 20px; /* 角の丸み */
+  border: 0; /* 枠線を消す */
+  transition: 0.3s; /* ホバーの変化を滑らかに */
+}
+
+/* ホバー時（カーソルをのせた時）の見た目 */
+.iro:hover {
+  background-color: #064fda; /* 背景色 */
+}
+
+.inline_button{  /* ボタン横並べ */
+    display:inline-block;
+}
+
+.inline {  /* 画像横並べ */
+    display: inline-block; /* 横並び */
+    padding-left: 40px;  /* 間隔 */
+    padding-right: 20px;  /* 間隔 */
+    padding-top: 20px;
+    background-color: white;
+}
+
+.item-list{
+  display: flex;
+  justify-content: center; /* 中央寄せ */
+}
+.item-list .item{
+  box-sizing: border-box;
+  margin-right: 10px;
+  background-color: #bf0000; /* 背景色 */
+  color: white; /* テキストカラー */
+  border-radius: 20px; /* 角の丸み */
+}
+
+.history {
+    padding: 5px;
+    padding-left: 10%;
+    margin-right: 70%;
+    color: white;
+    background: #bf0000;
+    border-radius: 10px; /* 角の丸み */
+}
+
+.num_form {
+    width: 130px;
+    padding: 10px 15px; /*ボックスを大きくする*/
+    font-size: 16px;
+    border-radius: 5px; /*ボックス角の丸み*/
+    border: 5px solid #ddd; /*枠線*/
+    box-sizing: border-box; /*横幅の解釈をpadding, borderまでとする*/
+}

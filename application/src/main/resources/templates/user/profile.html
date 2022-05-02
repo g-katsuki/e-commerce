@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link href="/css/sample.css" th:href="@{'/css/sample.css'}" rel="stylesheet"></link>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <title>Profile</title>
+</head>
+<body>
+
+<span>
+    <a href="/application/item/list">
+        <img src="./../images/logo.png" width="70" alt="logo">
+    </a>
+</span>
+
+<div id="userInfo" style="text-align: right; border-bottom: 1px solid lightgray; padding: 5px">
+
+<!--    <a th:href="@{'/cart/list'}" class="icon-shopping-cart" style="font-size: 25px; text-decoration: none">-->
+<!--        <i class="fa fa-shopping-cart"></i>-->
+<!--        <label id="lblCartCount" class="badge badge-warning"/><span style="padding-left: 2px" th:text="${cartItemsCount}"></span>-->
+<!--    </a>-->
+<!--    &nbsp;&nbsp;-->
+
+</div>
+
+<h1>アカウント情報</h1>
+
+<h2 th:text="${message}" style="color:#dc143c;"></h2>
+
+<div style="margin: 30px; padding: 20px">
+
+<div class="pro_bg">
+    <table cellpadding="5px" class="pro_bg" align="center" padding="20px">
+        <tr>
+            <td style="font-weight: bold">メールアドレス:</td>
+            <td th:text="${user.email}">Email</td>
+        </tr>
+        <tr>
+            <td style="font-weight: bold">パスワード:</td>
+            <td>**********</td>
+        </tr>
+        <tr>
+            <td style="font-weight: bold">名:</td>
+            <td th:text="${user.firstName}">First name</td>
+        </tr>
+        <tr>
+            <td style="font-weight: bold">姓:</td>
+            <td th:text="${user.lastName}">Last name</td>
+        </tr>
+        <tr>
+            <td style="font-weight: bold">郵便番号:</td>
+            <td th:text="${user.zipCode}">Zip code</td>
+        </tr>
+        <tr>
+            <td style="font-weight: bold">住所:</td>
+            <td th:text="${user.address}">Address</td>
+        </tr>
+        <tr>
+            <td style="font-weight: bold">電話番号:</td>
+            <td th:text="${user.phone}">Phone</td>
+        </tr>
+<!--        <tr>-->
+<!--            <td style="font-weight: bold">登録した日:</td>-->
+<!--            <td th:text="${user.createdAt}">Date</td>-->
+<!--        </tr>-->
+        <tr>
+            <td style="font-weight: bold">所持ポイント:</td>
+            <td th:text="${user.point}">Point </td>
+        </tr>
+    </table>
+</div>
+<br/><br/>
+<!--    <fieldset>-->
+<!--        <legend style="font-size: larger">Your Order History</legend>-->
+
+        <h2 class="history" >購入履歴</h2>
+        <div th:each="order : ${orderList}"> <!-- まとまり毎のオーダー -->
+            <table border="1">
+                <tr>
+                    <br/><b>購入日時:&emsp;</b>
+                    <span style="font-weight: bolder" th:text="${order.sdf}"></span>
+                    <td  style="width: 200px; text-align: center">
+                        <b>オーダー ID: <br/>XYZ0000001-<span th:text="${order.orderId}"></span></b>
+                    </td>
+                    <td valign="top" style="border: 1px solid gray; width: 700px">
+                        <table th:each="item : ${order.items}"> <!-- 1回のオーダー内のitemsに対してのループ -->
+                            <tr>
+                                <td valign="top">
+                                    <a th:href="@{'/item/detail/' + ${item.itemId}}">
+                                        <img th:src="${itemMap.get(item.itemId).photoAddress}" alt="item image"
+                                             height="100" width="100"><br>
+                                    </a>
+                                </td>
+                                <td valign="top" style="padding-left: 10px; padding-right: 20px">
+                                    <a th:href="@{'/item/detail/' + ${item.itemId}}">
+                                        <span th:text="${itemMap.get(item.itemId).name}"></span>
+                                    </a><br/>
+                                    値段: <span th:text="${#numbers.formatInteger(item.price, 2, 'COMMA')}"></span> 円<br/>
+                                    個数: <span th:text="${item.quantity}"></span> 個<br/>
+                                </td>
+<!--                                <td>&nbsp;</td>-->
+<!--                                <td>&nbsp;</td>-->
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+<!--    </fieldset>-->
+
+</div>
+
+<a th:href="@{/item/list}">買い物を続ける</a>
+<br/>
+</body>
+</html>

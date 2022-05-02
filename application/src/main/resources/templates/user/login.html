@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link href="/css/sample.css" th:href="@{'/css/sample.css'}" rel="stylesheet"></link>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <title>login</title>
+</head>
+
+
+<div id="userInfo" style="text-align: left; border-bottom: 1px solid lightgray; padding-top: 10px">
+    <span>
+        <a href="/application/item/list">
+            <img src="./../images/logo.png" width="70" alt="logo">
+        </a>
+    </span>
+    <h1>ログイン</h1>
+</div>
+
+<body>
+    <div style="margin-left: 20%; mergin-top: 10%; padding: 30px">
+<div class="gray_body">
+
+        <h2 th:text="${message}" style="margin-left: 5%; color:white;"></h2>
+
+        <form th:action="@{/user/login}" method="post">
+            <table cellpadding="5px">
+                <tr>
+                    <td><font color="white">メールアドレス: </font></td>
+                    <td><input type="text" name="email" th:value="${login.email}"></td>
+                </tr>
+                <tr>
+                    <td><font color="white">　パスワード　: </font></td>
+                    <td><input type="password" name="password" th:value="${login.password}"> </td>
+                </tr>
+                <tr>
+                    <td>&nbsp; </td>
+                    <td><input type="submit" value="ログイン"> </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+</div>
+
+<br/><br/>
+
+<div class="item-list">
+    <form role="form" action="/item/list"
+          th:action="@{/item/list}" >
+        <button class="item">買い物を続ける</button>
+    </form>
+    <form role="form" action="/user/register"
+          th:action="@{/user/register}" 　method="get">
+        <button class="item">サインインはこちら</button>
+    </form>
+</div>
+
+</body>
+</html>

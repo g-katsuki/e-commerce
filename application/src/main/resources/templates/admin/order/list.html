@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link href="/css/sample.css"
+          th:href="@{/css/sample.css}" rel="stylesheet"></link>
+    <title>Orders</title>
+</head>
+<body>
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link href="/css/sample.css" th:href="@{'/css/sample.css'}" rel="stylesheet"></link>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <title>Profile</title>
+</head>
+<body>
+
+<span>
+    <a href="/application/item/list">
+        <img src="./../../images/logo.png" width="70" alt="logo">
+    </a>
+</span>
+
+<h1>注文の管理</h1>
+
+<div class="dui-container main">
+
+    <div th:each="order : ${orderList}"> <!-- まとまり毎のオーダー -->
+        <table border="1">
+            <tr>
+                <br/><b>注文日時: </b>
+                <span style="font-weight: bolder" th:text="${order.sdf}"></span>
+                &emsp;
+                &emsp;
+                <span><b>ステータス: <font color="red"><span th:text="${order.status}"></span></font></b></span>
+                <td  style="width: 200px; text-align: center">
+                    <b>オーダー ID: <br/>XYZ0000001-<span th:text="${order.orderId}"></span></b><br/>
+                    <span th:if="${order.status.name() != 'COMPLETED'}"><button class="btn_style">配達完了にする</button></span>
+                </td>
+                <td valign="top" style="border: 1px solid gray; width: 700px">
+                    <table th:each="item : ${order.items}"> <!-- 1回のオーダー内のitemsに対してのループ -->
+                        <tr>
+                            <td valign="top">
+                                <a th:href="@{'/item/detail/' + ${item.itemId}}">
+                                    <img th:src="${itemMap.get(item.itemId).photoAddress}" alt="item image"
+                                         height="100" width="100"><br>
+                                </a>
+                            </td>
+                            <td valign="top" style="padding-left: 10px; padding-right: 20px">
+                                <a th:href="@{'/item/detail/' + ${item.itemId}}">
+                                    <span th:text="${itemMap.get(item.itemId).name}"></span>
+                                </a><br/>
+                                値段: <span th:text="${item.price}"></span> 円<br/>
+                                個数: <span th:text="${item.quantity}"></span> 個<br/>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+<!--    <div th:if="${orderList.isEmpty()}">No Order found!</div>-->
+
+<!--    <div th:each="order : ${orderList}">-->
+<!--        <fieldset>-->
+<!--            <legend style="font-weight: bold">Order No. <span th:text="${order.orderId}"></span></legend>-->
+
+<!--            <table>-->
+<!--                <tr>-->
+<!--                    <td style="width: 300px; background-color: lightgray; text-align: center; border: 1px solid gray">-->
+<!--                        <b>Date:</b> <br/>-->
+<!--                        <span style="font-weight: bolder" th:text="${order.createdAt}"></span> <br/>-->
+<!--                        <b>Customer ID: XYZ0000001-<span th:text="${order.orderId}"></span></b><br/>-->
+<!--                        <b>Order Status: <span th:text="${order.status}"></span></b><br/><br/>-->
+<!--                        <span th:if="${order.status.name() != 'COMPLETED'}">Mark this order as <button>COMPLETED</button></span>-->
+<!--                    </td>-->
+<!--                    <td style="border: 1px solid gray; width: 600px">-->
+<!--                        <table th:each="item : ${order.items}">-->
+<!--                            <tr>-->
+<!--                                <td valign="top">-->
+<!--                                    <a th:href="@{'/item/detail/' + ${item.itemId}}">-->
+<!--                                        <img th:src="${itemMap.get(item.itemId).photoAddress}" alt="item image"-->
+<!--                                             height="100" width="100"><br>-->
+<!--                                    </a>-->
+<!--                                </td>-->
+<!--                                <td valign="top" style="margin: 5px; padding-left: 10px; padding-right: 20px">-->
+<!--                                    <a th:href="@{'/item/detail/' + ${item.itemId}}">-->
+<!--                                        <span th:text="${itemMap.get(item.itemId).name}"></span>-->
+<!--                                    </a><br/>-->
+<!--                                    Price: <span th:text="${item.price}"></span>円<br/>-->
+<!--                                    Quantity: <span th:text="${item.quantity}"></span>円<br/>-->
+<!--                                </td>-->
+<!--                                <td>&nbsp;</td>-->
+<!--                                <td>&nbsp;</td>-->
+<!--                            </tr>-->
+<!--                        </table>-->
+<!--                    </td>-->
+<!--                </tr>-->
+<!--            </table>-->
+
+<!--        </fieldset>-->
+<!--        <br/>-->
+<!--    </div>-->
+
+</div>
+</body>
+</html>
